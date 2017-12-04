@@ -175,6 +175,10 @@ WHERE s.id = t.show_id and name = 'Edinburgh Royal Tattoo';
 SELECT COUNT(s.id)
 FROM shows s, shows_users u
 where s.id = u.show_id and s.name = 'Shitfaced Shakespeare';
+SELECT COUNT(shows_users) FROM shows_users INNER JOIN shows ON shows_users.show_id = shows.id WHERE shows.name = 'Shitfaced Shakespeare';
   -- 20. Select all of the user names and the count of shows they're going to see.
-  --
+  SELECT user_id, COUNT(show_id) FROM shows_users GROUP BY user_id;
   -- 21. SELECT all users who are going to a show at 17:15.
+SELECT u.name
+FROM users u JOIN shows_users su ON u.id = su.user_id
+JOIN times t ON su.show_id = t.show_id WHERE t.time = '17:15';
